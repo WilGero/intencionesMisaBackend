@@ -1,9 +1,9 @@
 const coneccion = require("../basedatos");
 module.exports = {
-  borrar: (datos, callBack) => {
+  borrar: (id, callBack) => {
     coneccion.query(
-      `delete from misas where id_misa=?`,
-      [datos.id_misa],
+      `delete from misas where id=?`,
+      [id],
       (error, results, fields) => {
         if (error) {
           callBack(error);
@@ -14,8 +14,8 @@ module.exports = {
   },
   actualiza: (datos, callBack) => {
     coneccion.query(
-      `update misas set tipo= ?, hora=?, fecha=? where id_misa = ?`,
-      [datos.tipo, datos.hora, datos.fecha, datos.id_misa],
+      `update misas set tipo=?, fecha=? where id=?`,
+      [datos.tipo,datos.fecha, datos.id],
       (error, results, fields) => {
         if (error) {
           callBack(error);
@@ -26,8 +26,8 @@ module.exports = {
   },
   agregar: (datos, callback) => {
     coneccion.query(
-      `insert into misas (tipo,hora,fecha) values (?,?,?)`,
-      [datos.tipo,datos.hora, datos.fecha],
+      `insert into misas (tipo,fecha) values (?,?)`,
+      [datos.tipo,datos.fecha],
       (error, results) => {
         if (error) callback(error);
         return callback(null, results);

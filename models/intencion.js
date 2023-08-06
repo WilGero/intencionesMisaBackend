@@ -14,7 +14,7 @@ module.exports = {
   },
   actualiza: (datos, callBack) => {
     coneccion.query(
-      `update intenciones set intencion= ?, ofrenda =?, name_remite=? where id_intencion = ?`,
+      `update intenciones set intencion= ?, ofrenda =?, remite=? where id = ?`,
       [datos.intencion, datos.ofrenda, datos.name_remite, datos.id_intencion],
       (error, results, fields) => {
         if (error) {
@@ -26,8 +26,8 @@ module.exports = {
   },
   agregar: (datos, callback) => {
     coneccion.query(
-      `insert into intenciones (intencion,ofrenda,name_remite,id_misa) values (?,?,?,?)`,
-      [datos.intencion, datos.ofrenda, datos.name_remite, datos.id_misa],
+      `insert into intenciones (intencion,ofrenda,remite,idmisa) values (?,?,?,?)`,
+      [datos.intencion, datos.ofrenda, datos.remite, datos.idmisa],
       (error, results) => {
         if (error) callback(error);
         return callback(null, results);

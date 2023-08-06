@@ -8,8 +8,8 @@ module.exports = {
       if (results) {
         jwt.sign(JSON.stringify(results), process.env.SECRET, (err, token) => {
           return res.status(200).json({
-            data: results,
-            token: token,
+            userdata: results,
+            token: token
           });
         });
       } else return res.status(403).send("Credenciales Erroneas");
@@ -17,8 +17,9 @@ module.exports = {
   },
 
   borrar: (req, res) => {
+    // console.log('este es el req'+ req.body);
     const body = req.body;
-    modeluser.borrar(body, (err, results) => {
+    modeluser.borrar(body.id, (err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({
@@ -34,7 +35,7 @@ module.exports = {
   },
   actualiza: (req, res) => {
     const body = req.body;
-    modeluser.actualiza(body, (err, results) => {
+    modeluser.actualiza(body.id, (err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({

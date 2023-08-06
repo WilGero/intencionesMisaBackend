@@ -6,7 +6,7 @@ function sha256(string) {
 module.exports = {
   verifica: (datos, callBack) => {
     coneccion.query(
-      `select * from usuarios where usuario= ? and contra=?`,
+        `select * from usuarios where usuario= ? and contra=?`,
       [datos.usuario, sha256(datos.contra)],
       (error, results, fields) => {
         if (error) {
@@ -16,10 +16,10 @@ module.exports = {
       }
     );
   },
-  borrar: (datos, callBack) => {
+  borrar: (id, callBack) => {
     coneccion.query(
-      `delete from usuarios where idusuario=?`,
-      [datos.id],
+      `delete from usuarios where id=?`,
+      [id],
       (error, results, fields) => {
         if (error) {
           callBack(error);
@@ -31,7 +31,7 @@ module.exports = {
 
   actualiza: (datos, callBack) => {
     coneccion.query(
-      `update usuarios set usuario= ?, contra =?,nombre=?, rol=? where idusuario = ?`,
+      `update usuarios set usuario= ?, contra =?,nombre=?, rol=? where id = ?`,
       [datos.usuario,sha256(datos.contra), datos.nombre, datos.rol, datos.id],
       (error, results, fields) => {
         if (error) {

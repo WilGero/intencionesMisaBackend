@@ -3,7 +3,7 @@ const modelmisa = require("../models/misa");
 module.exports = {
   borrar: (req, res) => {
     const body = req.body;
-    modelmisa.borrar(body, (err, results) => {
+    modelmisa.borrar(body.id, (err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({
